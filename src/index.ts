@@ -1,24 +1,32 @@
-import leia from 'readline-sync';
-import atividade01 from './atividade01';
-import atividade02 from './atividade02';
-import atividade03 from './atividade03';
-import atividade04 from './atividade04';
-import atividade05 from './atividade05';
+import { AVLTree } from "./AVLTree";
+import { BinarySearchTree } from "./BinarySearchTree";
+import { BinaryTree } from "./BinaryTree";
+import { Comparator } from "./Node";
+import { Queue } from "./Queue";
+import { Stack } from "./Stack";
 
-const opcao = leia.keyInSelect([
-  'Atividade 01', 
-  'Atividade 02', 
-  'Atividade 03', 
-  'Atividade 04', 
-  'Atividade 05'
-], 'SELECIONE A ATIVIDADE QUE DESEJA EXECUTAR: ') + 1;
+const minhaPilha = new Stack<number>();
+minhaPilha.push(10);
+minhaPilha.push(20);
+minhaPilha.push(30);
+minhaPilha.visualize();
 
-const atividade = {
-  1: atividade01,
-  2: atividade02,
-  3: atividade03,
-  4: atividade04,
-  5: atividade05,
-} as { [key: number]: () => void };
+const minhaFila = new Queue<number>();
+minhaFila.enqueue(40);
+minhaFila.enqueue(50);
+minhaFila.enqueue(60);
+minhaFila.visualize();
 
-atividade[opcao]();
+const bt = new BinaryTree<number>();
+[10, 20, 30, 40, 50, 60, 70].forEach((v) => bt.add(v));
+console.log(bt.visualize());
+
+const cmpNum: Comparator<number> = (a, b) => a - b;
+const bst = new BinarySearchTree<number>(cmpNum);
+[10, 5, 15, 3, 7, 12, 18].forEach((v) => bst.add(v));
+console.log(bst.visualize());
+
+
+const avl = new AVLTree<number>(cmpNum);
+[10, 5, 15, 3, 7, 12, 18, 1, 4, 6, 8].forEach((v) => avl.add(v));
+console.log(avl.visualize());
